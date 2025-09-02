@@ -1,11 +1,11 @@
 const express = require ('express')
-const deckRouter = require('./livro')
+const router = require('./livro')
 const app = express()
 const port = process.env.PORT || 3000
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
-app.use(deckRouter);
+app.use(router);
 
 app.get('/', (req, res) => {
     res.send('Servidor esta funcionando')

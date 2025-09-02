@@ -5,7 +5,7 @@ function criarLivro(req, res) {
         return res.status(400).send('Dados do livro incompletos.');
      }
   
-     if(!validarAno(req.body.year)) {
+     if(!validarAno(req.body.ano)) {
         return res.status(400).send('Ano do livro inválido.');
      }
 
@@ -21,12 +21,12 @@ function criarLivro(req, res) {
    console.log(Livros);
 
    if (!Livros) {
-      writeData([novoLivro]);
+      criarDados([novoLivro]);
       return res.status(201).send('Livro salvo com sucesso!');
    } 
 
    Livros.push(novoLivro);
-   writeData(Livros);
+   criarDados(Livros);
    return res.status(201).send('Livro salvo com sucesso!');
 }
 
@@ -46,6 +46,7 @@ function validarLivro(req) {
        return false;
     }
     
-    return true;
+    return true; 
  }
- 
+
+ module.exports = criarLivro;

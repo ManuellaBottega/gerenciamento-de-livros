@@ -8,13 +8,13 @@ function lerDados() {
        return undefined;
     }
  
-    const data = JSON.parse(fs.lerDadosSync(filePath, 'utf-8'));
+    const data = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
     return data;
  }
  
  function criarDados(data) {
     const filePath = path.join(__dirname, '/dados.json');
-    fs.criarDadosSync(filePath, `[\n ${ data.map((d) => JSON.stringify(d)).join(',\n ') } \n]`);
+    fs.writeFileSync(filePath, `[\n ${ data.map((d) => JSON.stringify(d)).join(',\n ') } \n]`);
  }
  
  module.exports = { lerDados, criarDados };

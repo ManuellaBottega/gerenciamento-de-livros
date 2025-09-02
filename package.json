@@ -4,11 +4,18 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js"
+    "start": "nodemon index.js" 
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ManuellaBottega/gerenciamento-de-livros.git"
   },
   "author": "",
   "license": "ISC",
-  "packageManager": "pnpm@10.15.1",
+  "bugs": {
+    "url": "https://github.com/ManuellaBottega/gerenciamento-de-livros/issues"
+  },
+  "homepage": "https://github.com/ManuellaBottega/gerenciamento-de-livros#readme",
   "description": "",
   "dependencies": {
     "express": "^5.1.0"
