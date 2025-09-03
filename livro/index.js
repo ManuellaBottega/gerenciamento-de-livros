@@ -8,9 +8,9 @@ const atualizarLivro = require('./atualizar');
 const buscarLivro = require('./buscar');
 
 router.post('/livro', criarLivro);
-/*router.put('/livro/:id', atualizarLivro);
+router.put('/livro/:id', atualizarLivro);
 router.delete('/livro/:id', deletarLivro);
-router.get('/Livros', listarLivros)
-router.get('/Livros/search', buscarLivro);*/
+router.get('/livros', listarLivros)
+router.get('/livros/search', buscarLivro);
 
 module.exports = router;
