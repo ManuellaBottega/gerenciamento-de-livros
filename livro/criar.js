@@ -9,6 +9,8 @@ function criarLivro(req, res) {
         return res.status(400).send('Ano do livro inválido.');
      }
 
+   const Livros = lerDados();
+
     const novoLivro = {
         id: Date.now(),
         titulo: req.body.titulo,
@@ -16,25 +18,17 @@ function criarLivro(req, res) {
         ano: req.body.ano,
         genero: req.body.genero
      }
-
-     const Livros = lerDados();
-   console.log(Livros);
-
-   if (!Livros) {
-      criarDados([novoLivro]);
-      return res.status(201).send('Livro salvo com sucesso!');
-   } 
-
-   Livros.push(novoLivro);
+   
+   Livros.push(novoLivro)
    criarDados(Livros);
-   return res.status(201).send('Livro salvo com sucesso!');
+
+   return res.status(201).json({ message: 'Livro salvo com sucesso!'});
 }
 
 function validarLivro(req) {
     if(!req.body || !req.body.titulo || !req.body.autor || !req.body.ano || !req.body.genero) {
        return false;
     }
- 
     return true;
  }
  

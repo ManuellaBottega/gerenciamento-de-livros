@@ -2,24 +2,24 @@ const { lerDados } = require("./gerenciarDados");
 
 function buscarLivro(req, res) {
     const livros = lerDados();
-    const { title, author, year, genre } = req.query;
+    const { titulo, autor, ano, genero } = req.query
 
     const resultados = livros.filter(livro => {
         let corresponde = true;
 
-        if (title && livro.titulo !== title) {
+        if (titulo && !livro.titulo.toLowerCase().includes(titulo.toLowerCase())) {
             corresponde = false;
         }
 
-        if (author && livro.autor !== author) {
+        if (autor && !livro.autor.toLowerCase().includes(autor.toLowerCase())) {
             corresponde = false;
         }
 
-        if (year && livro.ano != year) {
+        if (ano && !livro.ano.toLowerCase().includes(ano.toLowerCase())) {
             corresponde = false;
         }
 
-        if (genre && livro.genero !== genre) {
+        if (genero && !livro.genero.toLowerCase().includes(genero.toLowerCase())) {
             corresponde = false;
         }
 
@@ -30,7 +30,13 @@ function buscarLivro(req, res) {
         return res.status(404).send('Nenhum livro encontrado com os critérios de busca.');
     }
 
-    return res.status(200).json(resultados);
+    return res.status(200)
+    .send(resultados.map((livro) => `
+    id: ${ livro.id }
+    titulo: ${ livro.titulo }
+    autor: ${ livro.autor }
+    ano: ${ livro.ano }
+    genero: ${ livro.genero } 
+ `).join('\n'));
 }
-
 module.exports = buscarLivro
