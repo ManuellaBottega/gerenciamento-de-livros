@@ -5,7 +5,7 @@ const { criarLivro, criarAluno, criarAluguel } = require('./criar.js');
 const { listarLivros, listarAlunos, listarAlugueis } = require('./listar');
 const { deletarLivro, deletarAluno, deletarAluguel } = require('./deletar');
 const { atualizarLivro, atualizarAluno, atualizarAluguel } = require('./atualizar');
-const buscarLivro = require('./buscar');
+const { buscarLivro, buscarAluno, buscarAluguel } = require('./buscar');
 
 router.post('/livro', criarLivro);
 router.post('/estudante', criarAluno);
@@ -20,5 +20,7 @@ router.get('/livros', listarLivros)
 router.get('/estudantes', listarAlunos)
 router.get('/alugueis', listarAlugueis)
 router.get('/livros/search', buscarLivro);
+router.get('/estudantes/search', buscarAluno);
+router.get('/alugueis/search', buscarAluguel);
 
 module.exports = router;
