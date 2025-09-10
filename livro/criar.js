@@ -11,7 +11,7 @@ function criarLivro(req, res) {
         return res.status(400).send('Ano do livro inválido.');
      }
 
-   const Livros = lerDados();
+   const Livros = lerDados('livros');
 
    const novoLivro = {
       id: Date.now(),
