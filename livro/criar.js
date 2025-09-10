@@ -63,7 +63,7 @@ function criarAluno(req,res) {
       curso: req.body.curso
    }
 
-   estudantes.push(novoAluno)
+   Estudantes.push(novoAluno)
    criarDados(Estudantes, 'estudantes');
 
    return res.status(201).json({ message: 'Estudante salvo com sucesso!'});
