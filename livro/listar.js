@@ -1,6 +1,6 @@
 const { lerDados } = require("./gerenciarDados");
 
-function listarLivros(res) {
+function listarLivros(req, res) {
     const livros = lerDados('livros');
 
     if (!livros || livros.length === 0) {
@@ -10,17 +10,17 @@ function listarLivros(res) {
     return res.status(200).json(livros);
 }
 
-function listarAlunos(res) {
-    const alunos = lerDados('alunos');
+function listarAlunos(req, res) {
+    const estudantes = lerDados('estudantes');
 
-    if (!alunos || alunos.length === 0) {
-        return res.status(404).send('Nenhum aluno encontrado.');
+    if (!estudantes || estudantes.length === 0) {
+        return res.status(404).send('Nenhum estudante encontrado.');
     }
 
-    return res.status(200).json(alunos);
+    return res.status(200).json(estudantes);
 }
 
-function listarAlugueis(res) {
+function listarAlugueis(req, res) {
     const alugueis = lerDados('alugueis');
 
     if (!alugueis || alugueis.length === 0) {

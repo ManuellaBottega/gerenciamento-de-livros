@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 function lerDados(fileName) {
-   const filePath = path.join(__dirname, '/${fileName}.json');
+   const filePath = path.join(__dirname, `/${fileName}.json`);
 
    if (!fs.existsSync(filePath)) {
        return [];
@@ -21,7 +21,7 @@ function lerDados(fileName) {
 }
  
  function criarDados(data, fileName) {
-    const filePath = path.join(__dirname, '/${fileName}.json');
+    const filePath = path.join(__dirname, `/${fileName}.json`);
     const jsonData = JSON.stringify(data, null, 2); 
     fs.writeFileSync(filePath, jsonData);
  }

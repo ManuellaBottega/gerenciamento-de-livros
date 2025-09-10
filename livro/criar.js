@@ -1,6 +1,6 @@
 const { lerDados, criarDados } = require("./gerenciarDados");
 const livros = require('./livros.json')
-const alunos = require('./alunos.json')
+const estudantes = require('./estudantes.json')
 
 function criarLivro(req, res) {
     if(!validarLivro(req)) {
@@ -46,14 +46,14 @@ function validarAno(ano) {
 
 function criarAluno(req,res) {
    if(!validarAluno(req)) {
-      return res.status(400).send('Dados do aluno incompletos.');
+      return res.status(400).send('Dados do estudante incompletos.');
    }
 
    if(!validarAnoMatricula(req.body.ano, req.body.matricula)) {
       return res.status(400).send('Matricula e/ou Ano inválidos.');
    }
 
-   const Alunos = lerDados();
+   const Estudantes = lerDados('estudantes');
 
    const novoAluno = {
       id: Date.now(),
@@ -63,10 +63,10 @@ function criarAluno(req,res) {
       curso: req.body.curso
    }
 
-   Alunos.push(novoAluno)
-   criarDados(Alunos, 'alunos');
+   estudantes.push(novoAluno)
+   criarDados(Estudantes, 'estudantes');
 
-   return res.status(201).json({ message: 'Aluno salvo com sucesso!'});
+   return res.status(201).json({ message: 'Estudante salvo com sucesso!'});
 }
 
 function validarAluno(req) {
@@ -85,33 +85,34 @@ function validarAnoMatricula(ano, matricula) {
    return true;
 }
 
-function criarAluguel(req,res) {
+function criarAluguel(req, res) {
    if(!validarAluguel(req)) {
       return res.status(400).send('Dados do aluguel incompletos.');
    }
 
-   if(!validarIDlivro(req)) {
+   if(!validarIDlivro(req.body.idLivro)) {
       return res.status(400).send('Livro nao encontrado ou inexistente.');
    }
 
-   if(!validarIDaluno(req)) {
-      return res.status(400).send('Aluno nao encontrado ou inexistente.');
+   if(!validarIDaluno(req.body.idAluno)) {
+      return res.status(400).send('Estudante nao encontrado ou inexistente.');
    }
 
-   if(!validarDatas(req)) {
+   if(!validarDatas(req.body.dataAluguel)) {
       return res.status(400).send('Data invalida.');
    }
 
+   const dataAluguel = req.body.dataAluguel;
    const dataDevolucao = new Date(dataAluguel);
    dataDevolucao.setDate(dataDevolucao.getDate() + 14);
 
-   const Alugueis = lerDados();
+   const Alugueis = lerDados('alugueis');
 
    const novoAluguel = {
       id: Date.now(),
       idLivro: req.body.idLivro,
       idAluno: req.body.idAluno,
-      dataAluguel: req.body.dataAluguel,
+      dataAluguel: dataAluguel,
       dataDevolucao: dataDevolucao.toISOString().split('T')[0]
    }
 
@@ -129,7 +130,7 @@ function validarAluguel(req) {
 }
 
 function validarIDaluno(idAluno) {
-   return alunos.some(aluno => aluno.id === parseInt(idAluno));
+   return estudantes.some(aluno => aluno.id === parseInt(idAluno));
 }
 
 function validarIDlivro(idLivro) {
@@ -154,4 +155,4 @@ function validarDatas(dataAluguel) {
    return true;
 }
 
- module.exports = { criarLivro, criarAluno, criarAluguel };
+module.exports = { criarLivro, criarAluno, criarAluguel };
